@@ -14,8 +14,8 @@ pipeline {
     
     stage('Build Image') {
       steps {
-      sh "docker build -t brainupgrade/github-copilot-demo:${env.BUILD_ID} ."
-      sh "docker tag brainupgrade/github-copilot-demo:${env.BUILD_ID} brainupgrade/github-copilot-demo:latest"
+      sh "docker build -t jaiseban/github-copilot-demo:${env.BUILD_ID} ."
+      sh "docker tag jaiseban/github-copilot-demo:${env.BUILD_ID} jaiseban/github-copilot-demo:latest"
       }
     }
     
@@ -28,8 +28,8 @@ pipeline {
     success {
       withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        sh "docker push brainupgrade/github-copilot-demo:${env.BUILD_ID}"
-        sh "docker push brainupgrade/github-copilot-demo:latest"
+        sh "docker push jaiseban/github-copilot-demo:${env.BUILD_ID}"
+        sh "docker push jaiseban/github-copilot-demo:latest"
       }
     }
   }
